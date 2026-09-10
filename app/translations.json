@@ -1,0 +1,626 @@
+{
+  "Um lugar para cada memória.": {
+    "en": "A place for every memory.",
+    "pt": "Um lugar para cada memória."
+  },
+  "Histórias pelo caminho.": {
+    "en": "Stories along the way.",
+    "pt": "Histórias pelo caminho."
+  },
+  "Pelos caminhos do sertão": {
+    "en": "Along the roads of the sertão",
+    "pt": "Pelos caminhos do sertão"
+  },
+  "Nordeste, Brasil": {
+    "en": "Northeast, Brazil",
+    "pt": "Nordeste, Brasil"
+  },
+  "Explorar o mapa": {
+    "en": "Explore the map",
+    "pt": "Explorar o mapa"
+  },
+  "Novos caminhos, em breve.": {
+    "en": "More paths to discover, coming soon.",
+    "pt": "Novos caminhos, em breve."
+  },
+  "Photo map": {
+    "en": "Story map",
+    "pt": "Mapa de histórias"
+  },
+  "Map controls": {
+    "en": "Map controls",
+    "pt": "Controles do mapa"
+  },
+  "Minimize −": {
+    "en": "Minimize −",
+    "pt": "Minimizar −"
+  },
+  "Tags & layers +": {
+    "en": "Tags & layers +",
+    "pt": "Tags e camadas +"
+  },
+  "Northeast biomes": {
+    "en": "Northeast biomes",
+    "pt": "Biomas do Nordeste"
+  },
+  "Biomes": {
+    "en": "Biomes",
+    "pt": "Biomas"
+  },
+  "Hide biomes": {
+    "en": "Hide biomes",
+    "pt": "Ocultar biomas"
+  },
+  "Show biomes": {
+    "en": "Show biomes",
+    "pt": "Mostrar biomas"
+  },
+  "Show all": {
+    "en": "Show all",
+    "pt": "Mostrar todos"
+  },
+  "Indigenous lands": {
+    "en": "Indigenous lands",
+    "pt": "Terras indígenas"
+  },
+  "Urban footprint": {
+    "en": "Urban footprint",
+    "pt": "Áreas urbanizadas"
+  },
+  "Conservation": {
+    "en": "Conservation",
+    "pt": "Unidades de conservação"
+  },
+  "Urban concentrations": {
+    "en": "Urban concentrations",
+    "pt": "Concentrações urbanas"
+  },
+  "Population arrangements": {
+    "en": "Population arrangements",
+    "pt": "Arranjos populacionais"
+  },
+  "Disaster-risk areas": {
+    "en": "Disaster-risk areas",
+    "pt": "Áreas de risco de desastre"
+  },
+  "Immediate regions": {
+    "en": "Immediate regions",
+    "pt": "Regiões imediatas"
+  },
+  "About the layers": {
+    "en": "About the layers",
+    "pt": "Sobre as camadas"
+  },
+  "Click mapped areas for details. Biomes: 2004. Population figures: 2010. Other dates are shown where supplied; some source dates are unspecified. Counts refer to extracted records. Disaster-risk polygons are an undated source snapshot, not live alerts or a severity classification.": {
+    "en": "Click mapped areas for details. Biomes: 2004. Population figures: 2010. Other dates are shown where supplied; some source dates are unspecified. Counts refer to extracted records. Disaster-risk polygons are an undated source snapshot, not live alerts or a severity classification.",
+    "pt": "Clique nas áreas para ver detalhes. Biomas: 2004. População: 2010. Outras datas são exibidas quando disponíveis; algumas fontes não informam datas. As contagens correspondem aos registros extraídos. As áreas de risco são registros sem data, não alertas em tempo real nem uma classificação de gravidade."
+  },
+  "Filter by mock location": {
+    "en": "Filter by mock location",
+    "pt": "Filtrar por localização aproximada"
+  },
+  "All photos": {
+    "en": "All stories",
+    "pt": "Todas as histórias"
+  },
+  "Routes on": {
+    "en": "Routes on",
+    "pt": "Rotas ativadas"
+  },
+  "Routes off": {
+    "en": "Routes off",
+    "pt": "Rotas desativadas"
+  },
+  "Fit photos": {
+    "en": "Fit stories",
+    "pt": "Enquadrar histórias"
+  },
+  "photos": {
+    "en": "stories",
+    "pt": "histórias"
+  },
+  "Approximate locations": {
+    "en": "Approximate locations",
+    "pt": "Localizações aproximadas"
+  },
+  "Retry route": {
+    "en": "Retry route",
+    "pt": "Tentar rota novamente"
+  },
+  "Connect your map": {
+    "en": "Connect your map",
+    "pt": "Conecte seu mapa"
+  },
+  "Add your public Mapbox token to": {
+    "en": "Add your public Mapbox token to",
+    "pt": "Adicione seu token público do Mapbox em"
+  },
+  "Then restart the development server.": {
+    "en": "Then restart the development server.",
+    "pt": "Depois reinicie o servidor de desenvolvimento."
+  },
+  "Loading map…": {
+    "en": "Loading map…",
+    "pt": "Carregando mapa…"
+  },
+  "Add a Mapbox token to get started.": {
+    "en": "Add a Mapbox token to get started.",
+    "pt": "Adicione um token do Mapbox para começar."
+  },
+  "This browser does not support the WebGL features needed for the map.": {
+    "en": "This browser does not support the WebGL features needed for the map.",
+    "pt": "Este navegador não oferece os recursos WebGL necessários para o mapa."
+  },
+  "The map could not start. Check browser WebGL support and reload.": {
+    "en": "The map could not start. Check browser WebGL support and reload.",
+    "pt": "Não foi possível iniciar o mapa. Verifique o suporte a WebGL e recarregue."
+  },
+  "A map request failed. Check your connection and Mapbox token permissions.": {
+    "en": "A map request failed. Check your connection and Mapbox token permissions.",
+    "pt": "Uma solicitação do mapa falhou. Verifique sua conexão e as permissões do token Mapbox."
+  },
+  "Finding roads…": {
+    "en": "Finding roads…",
+    "pt": "Buscando estradas…"
+  },
+  "Driving route unavailable.": {
+    "en": "Driving route unavailable.",
+    "pt": "Rota de carro indisponível."
+  },
+  "Driving routes unavailable. Check your Mapbox token permissions.": {
+    "en": "Driving routes unavailable. Check your Mapbox token permissions.",
+    "pt": "Rotas de carro indisponíveis. Verifique as permissões do token Mapbox."
+  },
+  "No driving route found between these mock locations. Try another photo tag.": {
+    "en": "No driving route found between these approximate locations. Try another tag.",
+    "pt": "Nenhuma rota encontrada entre essas localizações aproximadas. Tente outra tag."
+  },
+  "Driving route unavailable: Please try again.": {
+    "en": "Driving route unavailable: Please try again.",
+    "pt": "Rota de carro indisponível. Tente novamente."
+  },
+  "Photo slideshow": {
+    "en": "Story slideshow",
+    "pt": "Apresentação de histórias"
+  },
+  "Close slideshow": {
+    "en": "Close slideshow",
+    "pt": "Fechar apresentação"
+  },
+  "Previous photo": {
+    "en": "Previous story",
+    "pt": "História anterior"
+  },
+  "Next photo": {
+    "en": "Next story",
+    "pt": "Próxima história"
+  },
+  "This image could not be loaded.": {
+    "en": "This image could not be loaded.",
+    "pt": "Não foi possível carregar esta imagem."
+  },
+  "Pause": {
+    "en": "Pause",
+    "pt": "Pausar"
+  },
+  "Play": {
+    "en": "Play",
+    "pt": "Reproduzir"
+  },
+  "Close ×": {
+    "en": "Close ×",
+    "pt": "Fechar ×"
+  },
+  "Audio unavailable": {
+    "en": "Audio unavailable",
+    "pt": "Áudio indisponível"
+  },
+  "Enable sound": {
+    "en": "Enable sound",
+    "pt": "Ativar som"
+  },
+  "Unmute": {
+    "en": "Unmute",
+    "pt": "Ativar áudio"
+  },
+  "Mute": {
+    "en": "Mute",
+    "pt": "Silenciar"
+  },
+  "View": {
+    "en": "View",
+    "pt": "Ver"
+  },
+  "Peoples": {
+    "en": "Peoples",
+    "pt": "Povos"
+  },
+  "State": {
+    "en": "State",
+    "pt": "Estado"
+  },
+  "Municipality": {
+    "en": "Municipality",
+    "pt": "Município"
+  },
+  "Recorded status": {
+    "en": "Recorded status",
+    "pt": "Situação registrada"
+  },
+  "Density": {
+    "en": "Density",
+    "pt": "Densidade"
+  },
+  "Municipality code": {
+    "en": "Municipality code",
+    "pt": "Código do município"
+  },
+  "Category": {
+    "en": "Category",
+    "pt": "Categoria"
+  },
+  "Group (source)": {
+    "en": "Group (source)",
+    "pt": "Grupo (fonte)"
+  },
+  "Administration": {
+    "en": "Administration",
+    "pt": "Esfera administrativa"
+  },
+  "Authority": {
+    "en": "Authority",
+    "pt": "Órgão responsável"
+  },
+  "Created": {
+    "en": "Created",
+    "pt": "Ano de criação"
+  },
+  "Source updated": {
+    "en": "Source updated",
+    "pt": "Atualização da fonte"
+  },
+  "Municipality population (2010)": {
+    "en": "Municipality population (2010)",
+    "pt": "População municipal (2010)"
+  },
+  "Urban population (2010)": {
+    "en": "Urban population (2010)",
+    "pt": "População urbana (2010)"
+  },
+  "Rural population (2010)": {
+    "en": "Rural population (2010)",
+    "pt": "População rural (2010)"
+  },
+  "Region code": {
+    "en": "Region code",
+    "pt": "Código da região"
+  },
+  "State code": {
+    "en": "State code",
+    "pt": "Código do estado"
+  },
+  "Source": {
+    "en": "Source",
+    "pt": "Origem"
+  },
+  "Source accuracy": {
+    "en": "Source accuracy",
+    "pt": "Precisão da fonte"
+  },
+  "Notes": {
+    "en": "Notes",
+    "pt": "Observações"
+  },
+  "Data date": {
+    "en": "Data date",
+    "pt": "Data dos dados"
+  },
+  "Unspecified — not a live alert": {
+    "en": "Unspecified — not a live alert",
+    "pt": "Não informada — não é um alerta em tempo real"
+  },
+  "Immediate region": {
+    "en": "Immediate region",
+    "pt": "Região imediata"
+  },
+  "Mapped risk area": {
+    "en": "Mapped risk area",
+    "pt": "Área de risco mapeada"
+  },
+  "Urban concentration": {
+    "en": "Urban concentration",
+    "pt": "Concentração urbana"
+  },
+  "Population arrangement": {
+    "en": "Population arrangement",
+    "pt": "Arranjo populacional"
+  },
+  "Conservation area": {
+    "en": "Conservation area",
+    "pt": "Unidade de conservação"
+  },
+  "Dry woodland and thorn scrub": {
+    "en": "Dry woodland and thorn scrub",
+    "pt": "Vegetação seca e arbustiva da caatinga"
+  },
+  "Tropical savanna": {
+    "en": "Tropical savanna",
+    "pt": "Savana tropical"
+  },
+  "Atlantic forest": {
+    "en": "Atlantic forest",
+    "pt": "Mata Atlântica"
+  },
+  "Amazon forest": {
+    "en": "Amazon forest",
+    "pt": "Floresta amazônica"
+  },
+  "Ida": {
+    "en": "Outbound",
+    "pt": "Ida"
+  },
+  "Volta": {
+    "en": "Return",
+    "pt": "Volta"
+  },
+  "Zoom in": {
+    "en": "Zoom in",
+    "pt": "Aproximar"
+  },
+  "Zoom out": {
+    "en": "Zoom out",
+    "pt": "Afastar"
+  },
+  "Reset bearing to north": {
+    "en": "Reset bearing to north",
+    "pt": "Orientar para o norte"
+  },
+  "Toggle attribution": {
+    "en": "Toggle attribution",
+    "pt": "Mostrar créditos"
+  },
+  "Close popup": {
+    "en": "Close popup",
+    "pt": "Fechar detalhes"
+  },
+  "Densa": {
+    "en": "Dense",
+    "pt": "Densa"
+  },
+  "Pouco densa": {
+    "en": "Low density",
+    "pt": "Pouco densa"
+  },
+  "Área urbanizada": {
+    "en": "Urbanized area",
+    "pt": "Área urbanizada"
+  },
+  "Outros equipamentos urbanos": {
+    "en": "Other urban facilities",
+    "pt": "Outros equipamentos urbanos"
+  },
+  "Regularizada": {
+    "en": "Regularized",
+    "pt": "Regularizada"
+  },
+  "Declarada": {
+    "en": "Declared",
+    "pt": "Declarada"
+  },
+  "Homologada": {
+    "en": "Ratified",
+    "pt": "Homologada"
+  },
+  "Em Estudo": {
+    "en": "Under study",
+    "pt": "Em Estudo"
+  },
+  "Delimitada": {
+    "en": "Delimited",
+    "pt": "Delimitada"
+  },
+  "Municipal": {
+    "en": "Municipal",
+    "pt": "Municipal"
+  },
+  "Estadual": {
+    "en": "State",
+    "pt": "Estadual"
+  },
+  "Federal": {
+    "en": "Federal",
+    "pt": "Federal"
+  },
+  "Parque": {
+    "en": "Park",
+    "pt": "Parque"
+  },
+  "Área de Proteção Ambiental": {
+    "en": "Environmental Protection Area",
+    "pt": "Área de Proteção Ambiental"
+  },
+  "Reserva Biológica": {
+    "en": "Biological Reserve",
+    "pt": "Reserva Biológica"
+  },
+  "Estação Ecológica": {
+    "en": "Ecological Station",
+    "pt": "Estação Ecológica"
+  },
+  "Reserva Extrativista": {
+    "en": "Extractive Reserve",
+    "pt": "Reserva Extrativista"
+  },
+  "Floresta Nacional": {
+    "en": "National Forest",
+    "pt": "Floresta Nacional"
+  },
+  "Reserva Particular do Patrimônio Natural": {
+    "en": "Private Natural Heritage Reserve",
+    "pt": "Reserva Particular do Patrimônio Natural"
+  },
+  "Monumento Natural": {
+    "en": "Natural Monument",
+    "pt": "Monumento Natural"
+  },
+  "Refúgio de Vida Silvestre": {
+    "en": "Wildlife Refuge",
+    "pt": "Refúgio de Vida Silvestre"
+  },
+  "Vazio intraurbano": {
+    "pt": "Vazio intraurbano",
+    "en": "Intra-urban vacant area"
+  },
+  "Sem associacao de dados do Censo Demografico 2010": {
+    "pt": "Sem associacao de dados do Censo Demografico 2010",
+    "en": "No associated 2010 census data"
+  },
+  "boa": {
+    "pt": "boa",
+    "en": "Good"
+  },
+  "face": {
+    "pt": "face",
+    "en": "Block face"
+  },
+  "Aglomerado Subnormal": {
+    "pt": "Aglomerado Subnormal",
+    "en": "Informal settlement (source classification)"
+  },
+  "otima": {
+    "pt": "otima",
+    "en": "Excellent"
+  },
+  "regular": {
+    "pt": "regular",
+    "en": "Fair"
+  },
+  "setor": {
+    "pt": "setor",
+    "en": "Census sector"
+  },
+  "Área de Relevante Interesse Ecológico": {
+    "pt": "Área de Relevante Interesse Ecológico",
+    "en": "Area of Relevant Ecological Interest"
+  },
+  "Reserva de Desenvolvimento Sustentável": {
+    "pt": "Reserva de Desenvolvimento Sustentável",
+    "en": "Sustainable Development Reserve"
+  },
+  "Encaminhada RI": {
+    "pt": "Encaminhada RI",
+    "en": "Submitted to the property registry"
+  },
+  "Amazon": {
+    "en": "Amazon",
+    "pt": "Amazônia"
+  },
+  "Atlantic Forest": {
+    "en": "Atlantic Forest",
+    "pt": "Mata Atlântica"
+  },
+  "Foto — Photos on a map": {
+    "en": "Stories — Paths of discovery",
+    "pt": "Histórias — Caminhos de descoberta"
+  },
+  "Place your photos on an interactive map.": {
+    "en": "Explore stories, sounds, and places on an interactive map.",
+    "pt": "Explore histórias, sons e lugares em um mapa interativo."
+  },
+  "Network error. Please check your connection and retry.": {
+    "en": "Network error. Please check your connection and retry.",
+    "pt": "Erro de rede. Verifique sua conexão e tente novamente."
+  },
+  "Forest": {
+    "en": "Forest",
+    "pt": "Floresta"
+  },
+  "CAMINHOS E DESCOBERTAS": {
+    "en": "PATHS & DISCOVERIES",
+    "pt": "CAMINHOS E DESCOBERTAS"
+  },
+  "Fotografias, sons e lugares. Descubra novos caminhos no mapa.": {
+    "en": "Stories, sounds, and places. Discover new paths on the map.",
+    "pt": "Histórias, sons e lugares. Descubra novos caminhos no mapa."
+  },
+  "Caminhos": {
+    "en": "Paths",
+    "pt": "Caminhos"
+  },
+  "CAMINHO": {
+    "en": "PATH",
+    "pt": "CAMINHO"
+  },
+  "De Aracaju a Juazeiro do Norte. Caminhos de descoberta entre rios, caatinga e histórias.": {
+    "en": "From Aracaju to Juazeiro do Norte. Paths of discovery through rivers, caatinga, and stories.",
+    "pt": "De Aracaju a Juazeiro do Norte. Caminhos de descoberta entre rios, caatinga e histórias."
+  },
+  "Back to paths": {
+    "en": "Back to paths",
+    "pt": "Voltar aos caminhos"
+  },
+  "Stories": {
+    "en": "Stories",
+    "pt": "Histórias"
+  },
+  "South America overview": {
+    "en": "South America overview",
+    "pt": "Visão geral da América do Sul"
+  },
+  "Overview": {
+    "en": "Overview",
+    "pt": "Visão geral"
+  },
+  "South America with the northeast Brazil route highlighted": {
+    "en": "South America with the northeast Brazil route highlighted",
+    "pt": "América do Sul com o caminho pelo Nordeste destacado"
+  },
+  "Brazil": {
+    "en": "Brazil",
+    "pt": "Brasil"
+  },
+  "Driving route": {
+    "en": "Driving route",
+    "pt": "Rota por estrada"
+  },
+  "Itinerary overview": {
+    "en": "Itinerary overview",
+    "pt": "Visão geral do roteiro"
+  },
+  "Made by Eduardo": {
+    "en": "Made by Eduardo",
+    "pt": "Feito por Eduardo"
+  },
+  "Suggest the next destination": {
+    "en": "Suggest the next destination",
+    "pt": "Sugira o próximo destino"
+  },
+  "Where should the next story begin?": {
+    "en": "Where should the next story begin?",
+    "pt": "Onde a próxima história deve começar?"
+  },
+  "Destination": {
+    "en": "Destination",
+    "pt": "Destino"
+  },
+  "A place worth discovering…": {
+    "en": "A place worth discovering…",
+    "pt": "Um lugar para descobrir…"
+  },
+  "Send": {
+    "en": "Send",
+    "pt": "Enviar"
+  },
+  "Sending…": {
+    "en": "Sending…",
+    "pt": "Enviando…"
+  },
+  "Thank you! Your suggestion has been sent.": {
+    "en": "Thank you! Your suggestion has been sent.",
+    "pt": "Obrigado! Sua sugestão foi enviada."
+  },
+  "Could not send your suggestion. Please try again later.": {
+    "en": "Could not send your suggestion. Please try again later.",
+    "pt": "Não foi possível enviar sua sugestão. Tente novamente mais tarde."
+  }
+}

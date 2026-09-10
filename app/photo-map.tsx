@@ -1,9 +1,14 @@
 'use client';
 
+import { useLanguage, LanguageSwitch } from './language';
+
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Photo } from './photo';
 import mapboxgl from 'mapbox-gl';
 import Slideshow from './slideshow';
+import OverviewMap from './overview-map';
+import Link from 'next/link';
+import { itinerary, tripBounds, tripRegionBounds } from './itinerary';
 import { applyMapTheme } from './map-theme';
 import { getDrivingRoute, type RouteData } from './driving-route';
 import { addBiomeLayers, biomes } from './biome-layer';
@@ -19,6 +24,7 @@ const token = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN?.trim();
 const hasToken = !!token?.startsWith('pk.') && !token.includes('replace_with');
 
 export default function PhotoMap({ photos }: { photos: Photo[] }) {
+  const { t, language } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [showRoute, setShowRoute] = useState(true);
@@ -35,12 +41,15 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
   const [routeStatus, setRouteStatus] = useState('');
   const [routeRetry, setRouteRetry] = useState(0);
   const routeCache = useRef(new Map<string, RouteData>());
-  const tags = useMemo(() => [...new Set(photos.flatMap((photo) => photo.tags))].sort(), [photos]);
+  const [overviewRoute, setOverviewRoute] = useState<RouteData | null>(null);
+  const tags = useMemo(() => [...new Set(photos.flatMap((photo) => photo.tags))], [photos]);
   const visiblePhotos = useMemo(() => photos.filter((photo) => !activeTag || photo.tags.includes(activeTag)), [photos, activeTag]);
+  const routeStops = activeTag ? visiblePhotos : itinerary;
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedIndex = visiblePhotos.findIndex((photo) => photo.id === selectedId);
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const labelFields = useRef(new Map<string, unknown>());
   const markers = useRef(new Map<string, mapboxgl.Marker>());
   const [status, setStatus] = useState(hasToken ? 'Loading map…' : 'Add a Mapbox token to get started.');
 
@@ -55,8 +64,10 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
       instance = new mapboxgl.Map({
         container: container.current, accessToken: token,
         style: 'mapbox://styles/mapbox/outdoors-v12',
-        center: [-40.5, -9.5], zoom: 5,
-        maxBounds: [[-49.5, -19.5], [-31.5, 0.5]],
+        bounds: tripBounds,
+        fitBoundsOptions: { padding: 45 },
+        maxBounds: tripRegionBounds,
+        renderWorldCopies: false,
         maxZoom: 15,
       });
     } catch {
@@ -118,6 +129,41 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
   }, [photos, visiblePhotos]);
 
   useEffect(() => {
+    for (const photo of visiblePhotos) {
+      const element = markers.current.get(photo.id)?.getElement();
+      if (element) {
+        element.setAttribute('aria-label', `${t('View')} ${photo.name}`);
+        element.title = `${photo.tags.map(t).join(', ')} — ${photo.name}`;
+      }
+    }
+    const instance = map.current;
+    if (!instance || !styleReady) return;
+    for (const layer of instance.getStyle()?.layers ?? []) {
+      if (layer.type !== 'symbol' || !layer.layout?.['text-field']) continue;
+      const field = layer.layout['text-field'];
+      const localize = (value: unknown): unknown => {
+        if (!Array.isArray(value)) return value;
+        if (value[0] === 'get' && /^name(?:_(en|pt))?$/.test(String(value[1]))) {
+          return ['coalesce', ['get', language === 'pt' ? 'name_pt' : 'name_en'], ['get', 'name']];
+        }
+        return value.map(localize);
+      };
+      // Keep the original expression to avoid nesting fallbacks on every switch.
+      if (!labelFields.current.has(layer.id)) labelFields.current.set(layer.id, field);
+      instance.setLayoutProperty(layer.id, 'text-field', localize(labelFields.current.get(layer.id)) as typeof field);
+    }
+    const labels: Record<string, string> = {
+      '.mapboxgl-ctrl-zoom-in': 'Zoom in', '.mapboxgl-ctrl-zoom-out': 'Zoom out',
+      '.mapboxgl-ctrl-compass': 'Reset bearing to north', '.mapboxgl-ctrl-attrib-button': 'Toggle attribution',
+    };
+    for (const [selector, label] of Object.entries(labels)) {
+      const button = container.current?.querySelector<HTMLElement>(selector);
+      button?.setAttribute('aria-label', t(label));
+      button?.setAttribute('title', t(label));
+    }
+  }, [language, t, visiblePhotos, styleReady]);
+
+  useEffect(() => {
     const instance = map.current;
     if (!instance || !styleReady) return;
     for (const layer of ['biome-fill', 'biome-edge']) {
@@ -128,38 +174,38 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
 
   useEffect(() => {
     if (!map.current || !styleReady) return;
-    return showIndigenousLands(map.current, indigenousVisible);
-  }, [indigenousVisible, styleReady]);
+    return showIndigenousLands(map.current, indigenousVisible, t);
+  }, [indigenousVisible, styleReady, t]);
 
   useEffect(() => {
     if (!map.current || !styleReady) return;
-    return showUrbanFootprint(map.current, urbanVisible);
-  }, [urbanVisible, styleReady]);
+    return showUrbanFootprint(map.current, urbanVisible, t);
+  }, [urbanVisible, styleReady, t]);
 
   useEffect(() => {
     if (!map.current || !styleReady) return;
-    return showConservationAreas(map.current, conservationVisible);
-  }, [conservationVisible, styleReady]);
+    return showConservationAreas(map.current, conservationVisible, t);
+  }, [conservationVisible, styleReady, t]);
 
   useEffect(() => {
     if (!map.current || !styleReady) return;
-    return showUrbanConcentrations(map.current, concentrationsVisible);
-  }, [concentrationsVisible, styleReady]);
+    return showUrbanConcentrations(map.current, concentrationsVisible, t);
+  }, [concentrationsVisible, styleReady, t]);
 
   useEffect(() => {
     if (!map.current || !styleReady) return;
-    return showPopulationArrangements(map.current, arrangementsVisible);
-  }, [arrangementsVisible, styleReady]);
+    return showPopulationArrangements(map.current, arrangementsVisible, t);
+  }, [arrangementsVisible, styleReady, t]);
 
   useEffect(() => {
     if (!map.current || !styleReady) return;
-    return showImmediateRegions(map.current, immediateRegionsVisible);
-  }, [immediateRegionsVisible, styleReady]);
+    return showImmediateRegions(map.current, immediateRegionsVisible, t);
+  }, [immediateRegionsVisible, styleReady, t]);
 
   useEffect(() => {
     if (!map.current || !styleReady) return;
-    return showDisasterRisk(map.current, disasterRiskVisible);
-  }, [disasterRiskVisible, styleReady]);
+    return showDisasterRisk(map.current, disasterRiskVisible, t);
+  }, [disasterRiskVisible, styleReady, t]);
 
   useEffect(() => {
     const instance = map.current;
@@ -178,45 +224,50 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
     }
     instance.setLayoutProperty('photo-route', 'visibility', showRoute ? 'visible' : 'none');
     setRouteStatus('');
-    if (!showRoute || visiblePhotos.length < 2 || !token) return;
+    if (!showRoute || routeStops.length < 2 || !token) return;
     const controller = new AbortController();
-    const key = JSON.stringify(visiblePhotos.map((photo) => [photo.longitude, photo.latitude]));
+    const key = JSON.stringify(routeStops.map((photo) => [photo.longitude, photo.latitude]));
     const cached = routeCache.current.get(key);
     if (cached) {
+      if (!activeTag) setOverviewRoute(cached);
       (instance.getSource('photo-route') as mapboxgl.GeoJSONSource).setData(cached);
       return;
     }
     setRouteStatus('Finding roads…');
-    void getDrivingRoute(visiblePhotos, token, controller.signal).then((route) => {
+    void getDrivingRoute(routeStops, token, controller.signal).then((route) => {
       if (controller.signal.aborted) return;
       if (routeCache.current.size >= 30) routeCache.current.clear();
       routeCache.current.set(key, route);
+      if (!activeTag) setOverviewRoute(route);
       (instance.getSource('photo-route') as mapboxgl.GeoJSONSource).setData(route);
       setRouteStatus('');
     }).catch((error) => {
-      if (!controller.signal.aborted) setRouteStatus(error instanceof Error ? error.message : 'Driving route unavailable.');
+      if (!controller.signal.aborted) setRouteStatus(error instanceof TypeError ? 'Network error. Please check your connection and retry.' : error instanceof Error ? error.message : 'Driving route unavailable.');
     });
     return () => controller.abort();
-  }, [visiblePhotos, showRoute, styleReady, routeRetry]);
+  }, [routeStops, showRoute, styleReady, routeRetry]);
 
   return <div id="app">
-    <main id="map" aria-label="Photo map">
+    <main id="map" aria-label={t("Photo map")}>
       <div ref={container} style={{ position: 'absolute', inset: 0 }} />
-      <section className={`map-filters ${menuOpen ? 'is-open' : 'is-minimized'}`} aria-label="Map controls">
+      <Link className="map-home-link" href="/" aria-label={t("Back to paths")}>{"← "}{t("Stories")}</Link>
+      <div className="map-language"><LanguageSwitch /></div>
+      <OverviewMap route={overviewRoute} />
+      <section className={`map-filters ${menuOpen ? 'is-open' : 'is-minimized'}`} aria-label={t("Map controls")}>
         <button className="menu-toggle" aria-expanded={menuOpen} aria-controls="map-menu-content" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? 'Minimize −' : 'Tags & layers +'}
+          {t(menuOpen ? 'Minimize −' : 'Tags & layers +')}
         </button>
         <div id="map-menu-content" hidden={!menuOpen}>
-      <section className="biome-legend" aria-label="Northeast biomes">
-        <div className="biome-heading"><div><h2>Biomes <small>2004</small></h2></div>
-          <button aria-pressed={showBiomes} onClick={() => setShowBiomes(!showBiomes)}>{showBiomes ? 'Hide biomes' : 'Show biomes'}</button>
+      <section className="biome-legend" aria-label={t("Northeast biomes")}>
+        <div className="biome-heading"><div><h2>{t("Biomes")} <small>2004</small></h2></div>
+          <button aria-pressed={showBiomes} onClick={() => setShowBiomes(!showBiomes)}>{t(showBiomes ? 'Hide biomes' : 'Show biomes')}</button>
         </div>
         {showBiomes && <div className="biome-options">
           {biomes.map((biome) => <button key={biome.id} aria-pressed={activeBiome === biome.id}
-            onClick={() => setActiveBiome(activeBiome === biome.id ? null : biome.id)} title={biome.description}>
-            <span className="biome-swatch" style={{ backgroundColor: biome.color }} />{biome.name}
+            onClick={() => setActiveBiome(activeBiome === biome.id ? null : biome.id)} title={t(biome.description)}>
+            <span className="biome-swatch" style={{ backgroundColor: biome.color }} />{t(biome.id === 'AMZ' ? 'Amazon' : biome.id === 'MAT' ? 'Atlantic Forest' : biome.name)}
           </button>)}
-          {activeBiome && <button onClick={() => setActiveBiome(null)}>Show all</button>}
+          {activeBiome && <button onClick={() => setActiveBiome(null)}>{t("Show all")}</button>}
         </div>}
 
         <div className="layer-grid">
@@ -228,41 +279,41 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
             { label: 'Population arrangements', color: '#bb9350', count: populationArrangementCount, checked: arrangementsVisible, toggle: setArrangementsVisible },
             { label: 'Disaster-risk areas', color: '#c3544b', count: disasterRiskCount, checked: disasterRiskVisible, toggle: setDisasterRiskVisible },
             { label: 'Immediate regions', color: '#89745e', count: immediateRegionCount, checked: immediateRegionsVisible, toggle: setImmediateRegionsVisible },
-          ].map((layer) => <label className="layer-row" key={layer.label}>
+          ].map((layer) => <label className="layer-row" key={t(layer.label)}>
             <span className="biome-swatch" style={{ backgroundColor: layer.color }} />
-            <span className="layer-name">{layer.label} <small>{layer.count.toLocaleString('en-US')}</small></span>
-            <input type="checkbox" role="switch" checked={layer.checked} onChange={(event) => layer.toggle(event.target.checked)} aria-label={layer.label} />
+            <span className="layer-name">{t(layer.label)} <small>{layer.count.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US')}</small></span>
+            <input type="checkbox" role="switch" checked={layer.checked} onChange={(event) => layer.toggle(event.target.checked)} aria-label={t(layer.label)} />
           </label>)}
         </div>
-        <details className="layer-notes"><summary>About the layers</summary>
-          <p>Click mapped areas for details. Biomes: 2004. Population figures: 2010. Other dates are shown where supplied; some source dates are unspecified. Counts refer to extracted records. Disaster-risk polygons are an undated source snapshot, not live alerts or a severity classification.</p>
+        <details className="layer-notes"><summary>{t("About the layers")}</summary>
+          <p>{t("Click mapped areas for details. Biomes: 2004. Population figures: 2010. Other dates are shown where supplied; some source dates are unspecified. Counts refer to extracted records. Disaster-risk polygons are an undated source snapshot, not live alerts or a severity classification.")}</p>
         </details>
       </section>
 
-        <div className="tag-list" aria-label="Filter by mock location">
-          <button aria-pressed={!activeTag} onClick={() => setActiveTag(null)}>All photos · {photos.length}</button>
+        <div className="tag-list" aria-label={t("Filter by mock location")}>
+          <button aria-pressed={!activeTag} onClick={() => setActiveTag(null)}>{t("All photos")} · {photos.length}</button>
           {tags.map((tag) => <button key={tag} aria-pressed={activeTag === tag} onClick={() => setActiveTag(activeTag === tag ? null : tag)}>
-            {tag} · {photos.filter((photo) => photo.tags.includes(tag)).length}
+            {t(tag)} · {photos.filter((photo) => photo.tags.includes(tag)).length}
           </button>)}
         </div>
         <div className="route-controls">
-          <button aria-pressed={showRoute} onClick={() => setShowRoute(!showRoute)}>{showRoute ? 'Routes on' : 'Routes off'}</button>
+          <button aria-pressed={showRoute} onClick={() => setShowRoute(!showRoute)}>{t(showRoute ? 'Routes on' : 'Routes off')}</button>
           <button disabled={!visiblePhotos.length || !styleReady} onClick={() => {
             const bounds = new mapboxgl.LngLatBounds();
             visiblePhotos.forEach((photo) => bounds.extend([photo.longitude, photo.latitude]));
             map.current?.fitBounds(bounds, { padding: 100, maxZoom: 12 });
-          }}>Fit photos</button>
-          <span>{visiblePhotos.length} photos · Mock locations</span>
-          {routeStatus && <span role="status">{routeStatus}</span>}
-          {routeStatus && routeStatus !== 'Finding roads…' && <button onClick={() => setRouteRetry((value) => value + 1)}>Retry route</button>}
+          }}>{t("Fit photos")}</button>
+          <span>{visiblePhotos.length} {t("photos")} · Aracaju ↔ Juazeiro do Norte · {t("Approximate locations")}</span>
+          {routeStatus && <span role="status">{t(routeStatus)}</span>}
+          {routeStatus && routeStatus !== 'Finding roads…' && <button onClick={() => setRouteRetry((value) => value + 1)}>{t("Retry route")}</button>}
         </div>
         </div>
       </section>
-      {hasToken && status && <p className="map-status" role="status" aria-live="polite">{status}</p>}
-      {!hasToken && <div id="setup"><h2>Connect your map</h2>
-        <p>Add your public Mapbox token to <code>.env.local</code>:</p>
+      {hasToken && status && <p className="map-status" role="status" aria-live="polite">{t(status)}</p>}
+      {!hasToken && <div id="setup"><h2>{t("Connect your map")}</h2>
+        <p>{t("Add your public Mapbox token to")} <code>.env.local</code>:</p>
         <pre>NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=pk.…</pre>
-        <p>Then restart the development server.</p>
+        <p>{t("Then restart the development server.")}</p>
       </div>}
     </main>
     {selectedIndex >= 0 && <Slideshow photos={visiblePhotos} initialIndex={selectedIndex} onClose={() => setSelectedId(null)} />}

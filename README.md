@@ -13,7 +13,9 @@ A small Next.js App Router + TypeScript app for placing photo thumbnails on a Ma
 
 Copy your JPEG, PNG, WebP, or GIF files directly into `public/photos/`, then refresh the page. For example, `public/photos/vacation.jpg` is served at `/photos/vacation.jpg`.
 
-The app automatically assigns mock coordinates near cities across northeast Brazil, including Recife, Fortaleza, Natal, Salvador, and São Luís. Locations are stable per filename across refreshes and when other photos are added. Renaming a file changes its location. These are mock locations, not GPS metadata.
+Photos are assigned approximate positions in filename order along the itinerary in `app/itinerary.ts`: Aracaju → Propriá → Paulo Afonso → Glória → Brejo do Burgo → Raso da Catarina → Floresta → Salgueiro → Juazeiro do Norte; returning via Petrolina → Juazeiro → Canudos → Jeremoabo → Aracaju. Tags identify the stop and Ida/Volta. These are mock placements, not GPS metadata or verified photo locations. Adding or removing photos redistributes assignments. The default route visits every itinerary stop even if fewer photos are present; tag filters route between the selected photos.
+
+The initial view fits this journey while retaining the northeast panning bounds. Raso da Catarina is a broad region: its waypoint is approximate, and Directions snaps it to the road network. Edit `app/itinerary.ts` to refine stops or access points.
 
 Click a map thumbnail to preview it. Remove an image by deleting its file from the folder and refreshing. Files remain on disk between restarts; no S3 or database is needed.
 
@@ -50,3 +52,18 @@ The overlay uses the complete 2004 data from the provided CSV, clipped to IBGE's
 - `.env.example` — public token configuration template
 
 Mapbox setup follows https://docs.mapbox.com/mapbox-gl-js/guides/get-started/use-with-npm/ .
+
+### Destination suggestions
+
+The home-page form submits text to `POST /api/suggestions`, which sends a plain-text email to `edbelluti@gmail.com` using [Resend](https://resend.com/docs/api-reference/emails/send-email). Visitors need no account or email client.
+
+Set these server-only variables in `.env` (and the deployment environment), then restart the app:
+
+```dotenv
+RESEND_API_KEY=your_resend_api_key
+SUGGESTIONS_FROM_EMAIL=Stories <stories@your-verified-domain.com>
+```
+
+Use a sender verified in your Resend account. Neither variable should use the `NEXT_PUBLIC_` prefix. Missing configuration or provider failure displays an error and preserves the visitor’s text. A success means the provider accepted the email; inbox delivery is handled by Resend.
+
+Validation limits suggestions to 2–200 characters. A per-process ceiling allows 10 email attempts per minute; it resets on restart and is not shared across deployment instances. Configure shared rate limiting for a public deployment with substantial traffic. Run `node scripts/check-suggestions.mjs` to verify the endpoint with mocked email delivery.

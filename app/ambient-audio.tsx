@@ -1,10 +1,13 @@
 'use client';
 
+import { useLanguage, LanguageSwitch } from './language';
+
 import { useEffect, useRef, useState } from 'react';
 
 type Track = { audio: HTMLAudioElement; retiring: boolean };
 
 export default function AmbientAudio({ src }: { src?: string }) {
+  const { t } = useLanguage();
   const tracks = useRef(new Set<Track>());
   const current = useRef<Track | null>(null);
   const mutedRef = useRef(false);
@@ -73,6 +76,6 @@ export default function AmbientAudio({ src }: { src?: string }) {
         mutedRef.current = !muted;
         setMuted(!muted);
       }
-    }}>{state === 'error' ? 'Audio unavailable' : state === 'blocked' ? 'Enable sound' : muted ? 'Unmute' : 'Mute'}</button>
+    }}>{t(state === 'error' ? 'Audio unavailable' : state === 'blocked' ? 'Enable sound' : muted ? 'Unmute' : 'Mute')}</button>
   </>;
 }

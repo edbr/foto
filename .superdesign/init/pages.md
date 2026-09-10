@@ -1,0 +1,47 @@
+# Dependency trees
+- app/page.tsx
+  - app/language.tsx
+    - app/translations.json
+  - app/trips.ts
+    - app/itinerary.ts
+  - app/route-chip.tsx
+    - app/south-america-outline.json
+- app/trips/sertao/page.tsx
+  - app/trips/sertao/../../photo-map.tsx
+    - app/trips/sertao/../../language.tsx
+      - app/trips/sertao/../../translations.json
+    - app/trips/sertao/../../photo.ts
+    - app/trips/sertao/../../slideshow.tsx
+      - app/trips/sertao/../../language.tsx
+      - app/trips/sertao/../../photo.ts
+      - app/trips/sertao/../../ambient-audio.tsx
+        - app/trips/sertao/../../language.tsx
+    - app/trips/sertao/../../overview-map.tsx
+      - app/trips/sertao/../../itinerary.ts
+      - app/trips/sertao/../../language.tsx
+      - app/trips/sertao/../../south-america-outline.json
+      - app/trips/sertao/../../driving-route.ts
+        - app/trips/sertao/../../photo.ts
+    - app/trips/sertao/../../itinerary.ts
+    - app/trips/sertao/../../map-theme.ts
+    - app/trips/sertao/../../driving-route.ts
+    - app/trips/sertao/../../biome-layer.ts
+    - app/trips/sertao/../../indigenous-layer.ts
+      - app/trips/sertao/../../../public/geo/indigenous-lands/manifest.json
+    - app/trips/sertao/../../urban-layer.ts
+      - app/trips/sertao/../../../public/geo/urban-footprint/manifest.json
+    - app/trips/sertao/../../conservation-layer.ts
+      - app/trips/sertao/../../../public/geo/conservation-areas/manifest.json
+    - app/trips/sertao/../../urban-concentration-layer.ts
+      - app/trips/sertao/../../../public/geo/urban-concentrations/manifest.json
+    - app/trips/sertao/../../population-arrangement-layer.ts
+      - app/trips/sertao/../../../public/geo/population-arrangements/manifest.json
+    - app/trips/sertao/../../immediate-region-layer.ts
+      - app/trips/sertao/../../../public/geo/immediate-regions/manifest.json
+    - app/trips/sertao/../../disaster-risk-layer.ts
+      - app/trips/sertao/../../../public/geo/disaster-risk/manifest.json
+  - app/trips/sertao/../../local-photos.ts
+    - app/trips/sertao/../../photo.ts
+    - app/trips/sertao/../../itinerary.ts
+
+Both inherit app/layout.tsx, app/language.tsx, app/translations.json and app/globals.css.

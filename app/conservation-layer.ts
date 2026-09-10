@@ -3,11 +3,13 @@ import manifest from '../public/geo/conservation-areas/manifest.json';
 
 export const conservationAreaCount = manifest.reduce((total, file) => total + file.count, 0);
 
-export function showConservationAreas(map: mapboxgl.Map, visible: boolean) {
+export function showConservationAreas(map: mapboxgl.Map, visible: boolean, t: (text: string) => string = (text) => text) {
+  // Retain the element: Mapbox clears getCanvas() when the map is removed.
+  const canvas = map.getCanvas();
   const popup = new mapboxgl.Popup({ maxWidth: '280px' });
   const handlers: { id: string; click: (event: mapboxgl.MapLayerMouseEvent) => void }[] = [];
-  const enter = () => { map.getCanvas().style.cursor = 'pointer'; };
-  const leave = () => { map.getCanvas().style.cursor = ''; };
+  const enter = () => { canvas.style.cursor = 'pointer'; };
+  const leave = () => { canvas.style.cursor = ''; };
   for (const file of manifest) {
     const id = `conservation-${file.state}`;
     if (!map.getSource(id) && visible) {
@@ -36,10 +38,13 @@ export function showConservationAreas(map: mapboxgl.Map, visible: boolean) {
       for (const [label, value] of [['Category', properties.category], ['Group (source)', properties.group], ['Administration', properties.sphere], ['Authority', properties.authority], ['Created', properties.created], ['Source updated', properties.updated]]) {
         if (!value) continue;
         const line = document.createElement('p');
-        line.textContent = `${label}: ${value}`;
+        line.textContent = `${t(label)}: ${t(label === 'Category' && value === 'Floresta' ? 'Forest' : value)}`;
         content.append(line);
       }
       popup.setLngLat(event.lngLat).setDOMContent(content).addTo(map);
+      const close = popup.getElement()?.querySelector('button');
+      close?.setAttribute('aria-label', t('Close popup'));
+      close?.setAttribute('title', t('Close popup'));
     };
     map.on('click', id, click);
     map.on('mouseenter', id, enter);
@@ -53,6 +58,6 @@ export function showConservationAreas(map: mapboxgl.Map, visible: boolean) {
       map.off('mouseenter', id, enter);
       map.off('mouseleave', id, leave);
     }
-    if (handlers.length) map.getCanvas().style.cursor = '';
+    if (handlers.length) canvas.style.cursor = '';
   };
 }

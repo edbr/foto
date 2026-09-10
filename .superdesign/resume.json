@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "targets": {
+    "/": {
+      "targetKind": "existing-ui",
+      "projectId": "e1b1e32b-25ff-451b-b27b-2418771ba6eb",
+      "baselineDraftId": "adefea83-8814-4eb7-8e79-f723f6df6c46",
+      "activeDraftId": "adefea83-8814-4eb7-8e79-f723f6df6c46",
+      "designSystemPath": ".superdesign/design-system.md",
+      "referenceIds": [
+        "775d8aac-d488-4119-a231-d5f2b89b3669"
+      ],
+      "contextFiles": [
+        ".superdesign/design-system.md",
+        "app/page.tsx",
+        "app/globals.css",
+        "app/layout.tsx",
+        "app/language.tsx",
+        "app/translations.json",
+        "app/trips.ts",
+        "app/itinerary.ts",
+        "app/route-chip.tsx",
+        "app/south-america-outline.json"
+      ],
+      "fingerprints": {
+        ".superdesign/design-system.md": "3a076d245d3d3d8912a33c9c341a41fd6a65c4463b42108b21df7c9bd7caded8",
+        "app/page.tsx": "d32d1303dfe6d7a8ebac88b0464ef0b33490651228696f33b1c143f567aca17c",
+        "app/globals.css": "5145bbff9819bc68374ca994e43eac70c47f4784453246d6cb756d5e7cade3a7",
+        "app/layout.tsx": "ac8c6c24aab67d35bdfd03bc373593686c2107489737afd81551414344319257",
+        "app/language.tsx": "be83a842d8abe123957e8b4792ca728c00635da60349eea5446cadc873b46da0",
+        "app/translations.json": "9a927ca202a6aae4fa3da5e468d8bb2cbe7e279d02d847487cf1f74e103b482e",
+        "app/trips.ts": "8578055a633d6eda5a605bde19fca5eb066334f60cb4c6d8f53556914d7f3b54",
+        "app/itinerary.ts": "1499cbc93494fcf5771cc165a78fd81d4dc934599e359f822ee51668c9a459ab",
+        "app/route-chip.tsx": "8feb0108685d19003e3fefa951463a419476736a02b63469e51629f701170d1a",
+        "app/south-america-outline.json": "1abf060638e3685aedccd8c19d4a455273376642b3dde5c05d83b02e399b21fd"
+      },
+      "components": [],
+      "drafts": {
+        "adefea83-8814-4eb7-8e79-f723f6df6c46": {
+          "title": "Stories \u2014 Paths of discovery",
+          "visualDirection": "Neutral museum editorial, bold sans headline and single featured sertao story",
+          "currentVersion": 4
+        }
+      },
+      "updatedAt": "2026-09-10T18:16:17.405022+00:00",
+      "pendingCorrection": "Remote v4 locator contains Brazil only; app uses the existing full South America component. No remote edits made.",
+      "implementedVersion": 4,
+      "implementationNotes": "Home CSS now implements fetched v4 editorial layout. App retains real route chip with full South America, bilingual copy, destination email, Instagram and Eduardo footer links. Source fingerprints retain generation-time baseline for future refresh."
+    }
+  }
+}
