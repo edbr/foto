@@ -1,0 +1,47 @@
+[
+  {
+    "state": "AL",
+    "count": 11,
+    "url": "/geo/immediate-regions/al.geojson"
+  },
+  {
+    "state": "BA",
+    "count": 34,
+    "url": "/geo/immediate-regions/ba.geojson"
+  },
+  {
+    "state": "CE",
+    "count": 18,
+    "url": "/geo/immediate-regions/ce.geojson"
+  },
+  {
+    "state": "MA",
+    "count": 22,
+    "url": "/geo/immediate-regions/ma.geojson"
+  },
+  {
+    "state": "PB",
+    "count": 15,
+    "url": "/geo/immediate-regions/pb.geojson"
+  },
+  {
+    "state": "PE",
+    "count": 18,
+    "url": "/geo/immediate-regions/pe.geojson"
+  },
+  {
+    "state": "PI",
+    "count": 19,
+    "url": "/geo/immediate-regions/pi.geojson"
+  },
+  {
+    "state": "RN",
+    "count": 11,
+    "url": "/geo/immediate-regions/rn.geojson"
+  },
+  {
+    "state": "SE",
+    "count": 6,
+    "url": "/geo/immediate-regions/se.geojson"
+  }
+]

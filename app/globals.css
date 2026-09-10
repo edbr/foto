@@ -29,22 +29,52 @@ button:focus-visible, input:focus-visible { outline: 3px solid #d86d42; outline-
 [hidden] { display: none !important; }
 .map-filters { position: absolute; left: 16px; right: 16px; bottom: 42px; max-width: 800px; padding: 12px; background: #f3eee3f2; border: 1px solid #d4c8b2; border-radius: 12px; box-shadow: 0 3px 16px #59463620; }
 .tag-list { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; }
-.map-filters button { flex-shrink: 0; border: 1px solid #c5b7a0; border-radius: 20px; background: #fbf7ee; color: #594636; padding: 10px 14px; min-height: 44px; }
+.map-filters button { flex-shrink: 0; border: 1px solid #c5b7a0; border-radius: 20px; background: #fbf7ee; color: #594636; padding: 5px 10px; min-height: 30px; font-size: 11px; }
 .map-filters button[aria-pressed="true"] { background: #79573e; border-color: #79573e; color: #fff9ee; }
 .map-filters button:disabled { opacity: .5; cursor: default; }
 .route-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .route-controls span { font-size: 12px; color: #6c5d4c; }
 .marker-number { position: absolute; top: -10px; right: -10px; min-width: 24px; height: 24px; padding: 2px 5px; border-radius: 12px; background: #79573e; color: white; font-size: 12px; border: 2px solid #f3eee3; }
-.biome-legend { position: absolute; top: 16px; left: 16px; width: min(300px, calc(100% - 80px)); padding: 18px; border: 1px solid #d4c8b2; border-radius: 12px; background: #f7f3eaf5; color: #594636; box-shadow: 0 4px 24px #59463615; }
+.biome-legend { padding: 8px 0 12px; margin-bottom: 12px; border-bottom: 1px solid #d4c8b2; color: #594636; }
 .biome-heading { display: flex; align-items: center; gap: 12px; justify-content: space-between; }
 .eyebrow { font-size: 10px; letter-spacing: 3px; color: #8b7159; }
-.biome-heading h2 { font-family: Georgia, serif; font-size: 23px; font-weight: 400; margin: 5px 0 12px; }
-.biome-legend button { border: 1px solid transparent; background: transparent; color: inherit; border-radius: 6px; padding: 8px; min-height: 36px; text-align: left; }
+.biome-heading h2 { font-family: Georgia, serif; font-size: 18px; font-weight: 400; margin: 5px 0 12px; }
+.biome-legend button { border: 1px solid transparent; background: transparent; color: inherit; border-radius: 6px; padding: 5px 8px; min-height: 30px; text-align: left; }
 .biome-heading > button { font-size: 11px; border-color: #d4c8b2; }
 .biome-options { display: flex; flex-wrap: wrap; gap: 2px; }
 .biome-options button { display: flex; align-items: center; gap: 8px; font-size: 12px; }
 .biome-options button[aria-pressed="true"] { background: #e7dfcf; border-color: #b4a487; }
 .biome-swatch { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #59463625; }
 .biome-legend p { font-size: 10px; color: #8b7963; margin: 12px 0 0; }
-.map-status { top: 16px; left: 332px; max-width: calc(100% - 400px); }
-@media (max-width: 640px) { .biome-legend { padding: 12px; } .biome-heading h2 { font-size: 20px; } .map-status { top: 240px; left: 16px; max-width: calc(100% - 32px); } }
+ .map-filters.is-minimized { right: auto; padding: 5px; border-radius: 22px; }
+.map-filters .menu-toggle { font-size: 12px; }
+.map-filters.is-open { max-width: 440px; max-height: min(65dvh, 580px); display: flex; flex-direction: column; overflow: hidden; }
+.map-filters.is-open .menu-toggle { align-self: flex-start; }
+#map-menu-content { margin-top: 8px; overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: 0 3px 3px; }
+.layer-grid { display: grid; gap: 0; margin-top: 8px; }
+.layer-row { display: flex; align-items: center; gap: 8px; min-height: 40px; border-bottom: 1px solid #d4c8b260; cursor: pointer; }
+.layer-name { flex: 1; font-size: 12px; }
+.layer-name small { font-size: 10px; color: #8b7963; margin-left: 4px; }
+.layer-row input { appearance: none; width: 28px; height: 16px; border-radius: 10px; background: #cbc3b5; flex-shrink: 0; position: relative; cursor: pointer; margin: 0 3px; }
+.layer-row input::after { content: ''; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fffdf7; transition: transform .15s; }
+.layer-row input:checked { background: #79573e; }
+.layer-row input:checked::after { transform: translateX(12px); }
+.layer-notes { margin-top: 8px; font-size: 11px; color: #8b7963; }
+.layer-notes summary { cursor: pointer; padding: 4px 0; }
+.biome-heading h2 { font-family: inherit; font-size: 12px; font-weight: 600; margin: 0; }
+.biome-heading h2 small { font-weight: 400; font-size: 10px; color: #8b7963; }
+.biome-legend { padding: 0 0 8px; margin-bottom: 8px; }
+.biome-options { margin-top: 6px; gap: 2px; }
+.biome-options button { font-size: 10px; gap: 5px; }
+.biome-swatch { flex-shrink: 0; }
+@media (max-width: 640px) {
+  .map-filters { left: 10px; right: 10px; bottom: max(36px, env(safe-area-inset-bottom)); padding: 10px; }
+  .map-filters.is-open { max-height: 62dvh; }
+  .route-controls { gap: 6px; }
+  .route-controls span { font-size: 10px; }
+}
+.indigenous-control { border-top: 1px solid #d4c8b2; margin-top: 12px; padding-top: 12px; }
+.indigenous-control button { display: flex; align-items: center; gap: 8px; }
+.land-popup { padding: 6px; color: #594636; }
+.land-popup p { font-size: 12px; margin: 6px 0; overflow-wrap: anywhere; }
+.map-status { top: 16px; left: 16px; max-width: calc(100% - 80px); }

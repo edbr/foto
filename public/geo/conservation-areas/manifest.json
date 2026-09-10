@@ -1,0 +1,17 @@
+[
+  {
+    "state": "federal",
+    "count": 179,
+    "url": "/geo/conservation-areas/federal.geojson"
+  },
+  {
+    "state": "municipal",
+    "count": 18,
+    "url": "/geo/conservation-areas/municipal.geojson"
+  },
+  {
+    "state": "state",
+    "count": 218,
+    "url": "/geo/conservation-areas/state.geojson"
+  }
+]

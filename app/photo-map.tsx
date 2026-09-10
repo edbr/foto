@@ -7,15 +7,30 @@ import Slideshow from './slideshow';
 import { applyMapTheme } from './map-theme';
 import { getDrivingRoute, type RouteData } from './driving-route';
 import { addBiomeLayers, biomes } from './biome-layer';
+import { indigenousLandCount, showIndigenousLands } from './indigenous-layer';
+import { urbanFootprintCount, showUrbanFootprint } from './urban-layer';
+import { conservationAreaCount, showConservationAreas } from './conservation-layer';
+import { urbanConcentrationCount, showUrbanConcentrations } from './urban-concentration-layer';
+import { populationArrangementCount, showPopulationArrangements } from './population-arrangement-layer';
+import { immediateRegionCount, showImmediateRegions } from './immediate-region-layer';
+import { disasterRiskCount, showDisasterRisk } from './disaster-risk-layer';
 
 const token = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN?.trim();
 const hasToken = !!token?.startsWith('pk.') && !token.includes('replace_with');
 
 export default function PhotoMap({ photos }: { photos: Photo[] }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [showRoute, setShowRoute] = useState(true);
   const [styleReady, setStyleReady] = useState(false);
   const [showBiomes, setShowBiomes] = useState(true);
+  const [disasterRiskVisible, setDisasterRiskVisible] = useState(false);
+  const [immediateRegionsVisible, setImmediateRegionsVisible] = useState(false);
+  const [arrangementsVisible, setArrangementsVisible] = useState(false);
+  const [concentrationsVisible, setConcentrationsVisible] = useState(true);
+  const [conservationVisible, setConservationVisible] = useState(false);
+  const [urbanVisible, setUrbanVisible] = useState(false);
+  const [indigenousVisible, setIndigenousVisible] = useState(true);
   const [activeBiome, setActiveBiome] = useState<string | null>(null);
   const [routeStatus, setRouteStatus] = useState('');
   const [routeRetry, setRouteRetry] = useState(0);
@@ -112,6 +127,41 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
   }, [showBiomes, activeBiome, styleReady]);
 
   useEffect(() => {
+    if (!map.current || !styleReady) return;
+    return showIndigenousLands(map.current, indigenousVisible);
+  }, [indigenousVisible, styleReady]);
+
+  useEffect(() => {
+    if (!map.current || !styleReady) return;
+    return showUrbanFootprint(map.current, urbanVisible);
+  }, [urbanVisible, styleReady]);
+
+  useEffect(() => {
+    if (!map.current || !styleReady) return;
+    return showConservationAreas(map.current, conservationVisible);
+  }, [conservationVisible, styleReady]);
+
+  useEffect(() => {
+    if (!map.current || !styleReady) return;
+    return showUrbanConcentrations(map.current, concentrationsVisible);
+  }, [concentrationsVisible, styleReady]);
+
+  useEffect(() => {
+    if (!map.current || !styleReady) return;
+    return showPopulationArrangements(map.current, arrangementsVisible);
+  }, [arrangementsVisible, styleReady]);
+
+  useEffect(() => {
+    if (!map.current || !styleReady) return;
+    return showImmediateRegions(map.current, immediateRegionsVisible);
+  }, [immediateRegionsVisible, styleReady]);
+
+  useEffect(() => {
+    if (!map.current || !styleReady) return;
+    return showDisasterRisk(map.current, disasterRiskVisible);
+  }, [disasterRiskVisible, styleReady]);
+
+  useEffect(() => {
     const instance = map.current;
     if (!instance || !styleReady) return;
     const data: RouteData = { type: 'FeatureCollection', features: [] };
@@ -152,8 +202,13 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
   return <div id="app">
     <main id="map" aria-label="Photo map">
       <div ref={container} style={{ position: 'absolute', inset: 0 }} />
+      <section className={`map-filters ${menuOpen ? 'is-open' : 'is-minimized'}`} aria-label="Map controls">
+        <button className="menu-toggle" aria-expanded={menuOpen} aria-controls="map-menu-content" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? 'Minimize −' : 'Tags & layers +'}
+        </button>
+        <div id="map-menu-content" hidden={!menuOpen}>
       <section className="biome-legend" aria-label="Northeast biomes">
-        <div className="biome-heading"><div><span className="eyebrow">NORDESTE</span><h2>A land of contrasts</h2></div>
+        <div className="biome-heading"><div><h2>Biomes <small>2004</small></h2></div>
           <button aria-pressed={showBiomes} onClick={() => setShowBiomes(!showBiomes)}>{showBiomes ? 'Hide biomes' : 'Show biomes'}</button>
         </div>
         {showBiomes && <div className="biome-options">
@@ -163,9 +218,27 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
           </button>)}
           {activeBiome && <button onClick={() => setActiveBiome(null)}>Show all</button>}
         </div>}
-        <p>Biome boundaries · 2004<br />Click a biome to isolate its area.</p>
+
+        <div className="layer-grid">
+          {[
+            { label: 'Indigenous lands', color: '#826383', count: indigenousLandCount, checked: indigenousVisible, toggle: setIndigenousVisible },
+            { label: 'Urban footprint', color: '#ad614c', count: urbanFootprintCount, checked: urbanVisible, toggle: setUrbanVisible },
+            { label: 'Conservation', color: '#377e78', count: conservationAreaCount, checked: conservationVisible, toggle: setConservationVisible },
+            { label: 'Urban concentrations', color: '#657da4', count: urbanConcentrationCount, checked: concentrationsVisible, toggle: setConcentrationsVisible },
+            { label: 'Population arrangements', color: '#bb9350', count: populationArrangementCount, checked: arrangementsVisible, toggle: setArrangementsVisible },
+            { label: 'Disaster-risk areas', color: '#c3544b', count: disasterRiskCount, checked: disasterRiskVisible, toggle: setDisasterRiskVisible },
+            { label: 'Immediate regions', color: '#89745e', count: immediateRegionCount, checked: immediateRegionsVisible, toggle: setImmediateRegionsVisible },
+          ].map((layer) => <label className="layer-row" key={layer.label}>
+            <span className="biome-swatch" style={{ backgroundColor: layer.color }} />
+            <span className="layer-name">{layer.label} <small>{layer.count.toLocaleString('en-US')}</small></span>
+            <input type="checkbox" role="switch" checked={layer.checked} onChange={(event) => layer.toggle(event.target.checked)} aria-label={layer.label} />
+          </label>)}
+        </div>
+        <details className="layer-notes"><summary>About the layers</summary>
+          <p>Click mapped areas for details. Biomes: 2004. Population figures: 2010. Other dates are shown where supplied; some source dates are unspecified. Counts refer to extracted records. Disaster-risk polygons are an undated source snapshot, not live alerts or a severity classification.</p>
+        </details>
       </section>
-      <section className="map-filters" aria-label="Photo filters">
+
         <div className="tag-list" aria-label="Filter by mock location">
           <button aria-pressed={!activeTag} onClick={() => setActiveTag(null)}>All photos · {photos.length}</button>
           {tags.map((tag) => <button key={tag} aria-pressed={activeTag === tag} onClick={() => setActiveTag(activeTag === tag ? null : tag)}>
@@ -173,15 +246,16 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
           </button>)}
         </div>
         <div className="route-controls">
-          <button aria-pressed={showRoute} onClick={() => setShowRoute(!showRoute)}>{showRoute ? 'Hide connections' : 'Show connections'}</button>
+          <button aria-pressed={showRoute} onClick={() => setShowRoute(!showRoute)}>{showRoute ? 'Routes on' : 'Routes off'}</button>
           <button disabled={!visiblePhotos.length || !styleReady} onClick={() => {
             const bounds = new mapboxgl.LngLatBounds();
             visiblePhotos.forEach((photo) => bounds.extend([photo.longitude, photo.latitude]));
             map.current?.fitBounds(bounds, { padding: 100, maxZoom: 12 });
           }}>Fit photos</button>
-          <span>{visiblePhotos.length} photos · Mock locations · Driving route in photo order</span>
+          <span>{visiblePhotos.length} photos · Mock locations</span>
           {routeStatus && <span role="status">{routeStatus}</span>}
           {routeStatus && routeStatus !== 'Finding roads…' && <button onClick={() => setRouteRetry((value) => value + 1)}>Retry route</button>}
+        </div>
         </div>
       </section>
       {hasToken && status && <p className="map-status" role="status" aria-live="polite">{status}</p>}

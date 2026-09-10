@@ -1,0 +1,52 @@
+[
+  {
+    "state": "AL",
+    "count": 11,
+    "url": "/geo/population-arrangements/al.geojson"
+  },
+  {
+    "state": "BA",
+    "count": 25,
+    "url": "/geo/population-arrangements/ba.geojson"
+  },
+  {
+    "state": "CE",
+    "count": 17,
+    "url": "/geo/population-arrangements/ce.geojson"
+  },
+  {
+    "state": "MA",
+    "count": 22,
+    "url": "/geo/population-arrangements/ma.geojson"
+  },
+  {
+    "state": "PB",
+    "count": 29,
+    "url": "/geo/population-arrangements/pb.geojson"
+  },
+  {
+    "state": "PE",
+    "count": 22,
+    "url": "/geo/population-arrangements/pe.geojson"
+  },
+  {
+    "state": "PI",
+    "count": 10,
+    "url": "/geo/population-arrangements/pi.geojson"
+  },
+  {
+    "state": "RN",
+    "count": 11,
+    "url": "/geo/population-arrangements/rn.geojson"
+  },
+  {
+    "state": "SE",
+    "count": 15,
+    "url": "/geo/population-arrangements/se.geojson"
+  },
+  {
+    "state": "TO",
+    "count": 3,
+    "url": "/geo/population-arrangements/to.geojson"
+  }
+]

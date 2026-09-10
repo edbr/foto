@@ -1,0 +1,42 @@
+[
+  {
+    "state": "AL",
+    "count": 10,
+    "url": "/geo/indigenous-lands/al.geojson"
+  },
+  {
+    "state": "BA",
+    "count": 23,
+    "url": "/geo/indigenous-lands/ba.geojson"
+  },
+  {
+    "state": "CE",
+    "count": 8,
+    "url": "/geo/indigenous-lands/ce.geojson"
+  },
+  {
+    "state": "MA",
+    "count": 20,
+    "url": "/geo/indigenous-lands/ma.geojson"
+  },
+  {
+    "state": "PB",
+    "count": 3,
+    "url": "/geo/indigenous-lands/pb.geojson"
+  },
+  {
+    "state": "PE",
+    "count": 14,
+    "url": "/geo/indigenous-lands/pe.geojson"
+  },
+  {
+    "state": "SE",
+    "count": 1,
+    "url": "/geo/indigenous-lands/se.geojson"
+  },
+  {
+    "state": "border",
+    "count": 2,
+    "url": "/geo/indigenous-lands/border.geojson"
+  }
+]

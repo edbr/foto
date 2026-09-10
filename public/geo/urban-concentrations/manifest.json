@@ -1,0 +1,47 @@
+[
+  {
+    "state": "AL",
+    "count": 10,
+    "url": "/geo/urban-concentrations/al.geojson"
+  },
+  {
+    "state": "BA",
+    "count": 22,
+    "url": "/geo/urban-concentrations/ba.geojson"
+  },
+  {
+    "state": "CE",
+    "count": 14,
+    "url": "/geo/urban-concentrations/ce.geojson"
+  },
+  {
+    "state": "MA",
+    "count": 11,
+    "url": "/geo/urban-concentrations/ma.geojson"
+  },
+  {
+    "state": "PB",
+    "count": 13,
+    "url": "/geo/urban-concentrations/pb.geojson"
+  },
+  {
+    "state": "PE",
+    "count": 19,
+    "url": "/geo/urban-concentrations/pe.geojson"
+  },
+  {
+    "state": "PI",
+    "count": 2,
+    "url": "/geo/urban-concentrations/pi.geojson"
+  },
+  {
+    "state": "RN",
+    "count": 6,
+    "url": "/geo/urban-concentrations/rn.geojson"
+  },
+  {
+    "state": "SE",
+    "count": 12,
+    "url": "/geo/urban-concentrations/se.geojson"
+  }
+]
