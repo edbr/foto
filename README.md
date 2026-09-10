@@ -29,6 +29,12 @@ Put an MP3, WAV, OGG, or M4A recording in `public/audio/` and refresh the page:
 
 Audio loops at a low volume while the slideshow is open, fades between different recordings, and stops on close. Use Mute/Unmute in the toolbar. If your browser blocks playback, click Enable sound. If the audio folder is empty, photos are silent.
 
+## Northeast biomes
+
+The map is restricted to northeast Brazil, with surrounding areas dimmed. A local biome overlay shows Caatinga, Cerrado, Mata Atlântica, and Amazônia. Click a biome in the legend to isolate it; click it again or Show all to restore the full overlay. Hide biomes returns to the terrain colors.
+
+The overlay uses the complete 2004 data from the provided CSV, clipped to IBGE's regional boundary. The 2019 set has missing Amazônia geometry. See `public/geo/README.md` for provenance and regeneration instructions.
+
 ## Commands
 
 - `npm run dev` — development server

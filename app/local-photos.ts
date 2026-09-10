@@ -10,6 +10,7 @@ const locations = [
   [-38.5014, -12.9777], [-44.2825, -2.5307], [-42.8034, -5.0892],
   [-40.507, -9.3891],
 ];
+const cityTags = ['Recife', 'Fortaleza', 'Natal', 'João Pessoa', 'Maceió', 'Aracaju', 'Salvador', 'São Luís', 'Teresina', 'Petrolina'];
 
 function mockCoordinates(filename: string) {
   let hash = 2166136261;
@@ -19,6 +20,7 @@ function mockCoordinates(filename: string) {
   const [longitude, latitude] = locations[hash % locations.length];
   // Small offsets separate photos near the same city; filenames keep locations stable.
   return {
+    tags: [cityTags[hash % locations.length]],
     longitude: longitude + ((Math.floor(hash / 10) % 1000) / 1000 - 0.5) * 0.02,
     latitude: latitude + ((Math.floor(hash / 10000) % 1000) / 1000 - 0.5) * 0.02,
   };

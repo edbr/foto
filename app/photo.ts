@@ -3,6 +3,7 @@ export type Photo = {
   name: string;
   url: string;
   audioUrl?: string;
+  tags: string[];
   longitude: number;
   latitude: number;
 };

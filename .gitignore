@@ -7,3 +7,4 @@ dist/
 out/
 *.tsbuildinfo
 next-env.d.ts
+br_geobr_mapas_bioma.csv
