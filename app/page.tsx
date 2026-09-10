@@ -29,10 +29,9 @@ export default function Home() {
     </section>
     <DestinationSuggestion />
     <footer className="home-footer">
-      <span>{t("Novos caminhos, em breve.")}</span>
+      <span><a className="home-credit" href="https://edbelluti.com/">{t("Made by Eduardo")}</a></span>
       <div className="home-footer-links">
         <a href="https://www.instagram.com/dantebelluti/">Instagram ↗</a>
-        <a className="home-credit" href="https://edbelluti.com/">{t("Made by Eduardo")}</a>
       </div>
     </footer>
   </main>;
