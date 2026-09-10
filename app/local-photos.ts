@@ -31,14 +31,15 @@ export async function getLocalPhotos(): Promise<Photo[]> {
   ]);
   const audioFiles = audioEntries.filter((entry) => entry.isFile() && /\.(mp3|wav|ogg|m4a)$/i.test(entry.name))
     .map((entry) => entry.name).sort();
-  const audioFor = (name: string) => {
+  const audioFor = (name: string, index: number) => {
     const stem = path.parse(name).name;
     const match = audioFiles.find((file) => path.parse(file).name === stem)
-      ?? audioFiles.find((file) => path.parse(file).name === 'default');
+      ?? audioFiles.find((file) => path.parse(file).name === 'default')
+      ?? audioFiles[index % audioFiles.length];
     return match ? `/audio/${encodeURIComponent(match)}` : undefined;
   };
   return entries
     .filter((entry) => entry.isFile() && /\.(jpe?g|png|webp|gif)$/i.test(entry.name))
     .sort((a, b) => a.name.localeCompare(b.name))
-    .map(({ name }) => ({ id: name, name, url: `/photos/${encodeURIComponent(name)}`, audioUrl: audioFor(name), ...mockCoordinates(name) }));
+    .map(({ name }, index) => ({ id: name, name, url: `/photos/${encodeURIComponent(name)}`, audioUrl: audioFor(name, index), ...mockCoordinates(name) }));
 }

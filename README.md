@@ -25,8 +25,9 @@ Put an MP3, WAV, OGG, or M4A recording in `public/audio/` and refresh the page:
 
 - `default.mp3` plays for every photo without its own recording.
 - Match an image's filename (without its extension) for a specific ambience: `public/photos/market.jpg` uses `public/audio/market.mp3`.
+- Without a matching or default recording, the app rotates through the audio files in filename order across the sorted photos. This is a placeholder assignment, not scene recognition.
 
-Audio loops at a low volume while the slideshow is open, fades between different recordings, and stops on close. Use Mute/Unmute in the toolbar. If your browser blocks playback, click Enable sound. Photos without a matching or default recording are silent. Recordings are not bundled; add your own or appropriately licensed files.
+Audio loops at a low volume while the slideshow is open, fades between different recordings, and stops on close. Use Mute/Unmute in the toolbar. If your browser blocks playback, click Enable sound. If the audio folder is empty, photos are silent.
 
 ## Commands
 
