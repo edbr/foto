@@ -1,0 +1,29 @@
+:root { font-family: Inter, system-ui, sans-serif; color: #23392f; background: #f5f3ed; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+#app { height: 100dvh; }
+p { font-size: 14px; line-height: 1.6; }
+h2 { font-size: 17px; }
+button { font: inherit; cursor: pointer; }
+#map { position: relative; width: 100%; height: 100%; background: #e3e8df; }
+.map-status { position: absolute; top: 16px; left: 16px; max-width: calc(100% - 80px); margin: 0; padding: 10px 14px; border-radius: 8px; background: #fffdf7; box-shadow: 0 2px 8px #0002; }
+#setup { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(440px, 90%); padding: 24px; border-radius: 12px; background: #fffdf7; }
+#setup h2 { margin-top: 0; }
+pre { overflow-x: auto; font-size: 12px; }
+.photo-marker { width: 62px; height: 62px; border: 3px solid white; border-radius: 9px; padding: 0; background: white; box-shadow: 0 3px 12px #0004; }
+.photo-marker img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
+.slideshow { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 20px; background: #101310; color: #fff; }
+.slideshow[open] { display: flex; flex-direction: column; }
+.slideshow::backdrop { background: #101310; }
+.slideshow-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.slideshow-toolbar > div { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.slideshow button { min-width: 44px; min-height: 44px; padding: 8px 16px; border: 1px solid #ffffff40; border-radius: 8px; background: #252b25; color: white; }
+.slideshow button:hover { background: #3b453b; }
+.slideshow-stage { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; margin-top: 16px; }
+.slideshow-stage img { width: 100%; height: 100%; object-fit: contain; }
+.slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 32px; }
+.previous { left: 0; }
+.next { right: 0; }
+.slide-caption { text-align: center; overflow-wrap: anywhere; max-height: 15dvh; overflow-y: auto; margin: 16px 0 0; }
+button:focus-visible, input:focus-visible { outline: 3px solid #d86d42; outline-offset: 3px; }
+[hidden] { display: none !important; }
