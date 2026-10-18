@@ -622,5 +622,25 @@
   "Could not send your suggestion. Please try again later.": {
     "en": "Could not send your suggestion. Please try again later.",
     "pt": "Não foi possível enviar sua sugestão. Tente novamente mais tarde."
+  },
+  "Built by Eduardo Belluti": {
+    "en": "Built by Eduardo Belluti",
+    "pt": "Criado por Eduardo Belluti"
+  },
+  "About this project": {
+    "en": "About this project",
+    "pt": "Sobre este projeto"
+  },
+  "More projects": {
+    "en": "More projects",
+    "pt": "Mais projetos"
+  },
+  "Project information": {
+    "en": "Project information",
+    "pt": "Informações do projeto"
+  },
+  "A travel story connecting photographs, sounds, and geographic data from Aracaju to Juazeiro do Norte. Photo locations are approximate.": {
+    "en": "A travel story connecting photographs, sounds, and geographic data from Aracaju to Juazeiro do Norte. Photo locations are approximate.",
+    "pt": "Uma história de viagem conectando fotografias, sons e dados geográficos de Aracaju a Juazeiro do Norte. As localizações das fotos são aproximadas."
   }
 }

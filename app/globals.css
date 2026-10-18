@@ -180,3 +180,9 @@ a:focus-visible { outline: 3px solid var(--ui-active); outline-offset: 4px; }
 .destination-suggestion .suggestion-status { min-height: 38px; margin: 12px 0 0; color: white; }
 @media (max-width: 800px) { .destination-suggestion { grid-template-columns: 1fr; padding: 32px 24px; gap: 24px; } .destination-suggestion h2 { font-size: 26px; } }
 @media (max-width: 380px) { .suggestion-fields { flex-direction: column; } .suggestion-fields button { justify-content: space-between; } }
+
+.project-context { padding-bottom: 16px; border-bottom: 1px solid var(--ui-border); margin-bottom: 16px; }
+.project-context h1 { font-size: 17px; margin: 0 0 8px; }
+.project-context p { font-size: 12px; }
+.project-context a { color: inherit; text-underline-offset: 3px; }
+.project-context nav { font-size: 12px; }

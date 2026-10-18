@@ -1,5 +1,6 @@
 'use client';
 
+import { person, site } from './site';
 import { useLanguage, LanguageSwitch } from './language';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -258,6 +259,15 @@ export default function PhotoMap({ photos }: { photos: Photo[] }) {
           {t(menuOpen ? 'Minimize −' : 'Tags & layers +')}
         </button>
         <div id="map-menu-content" hidden={!menuOpen}>
+      <section aria-labelledby="trip-title" className="project-context">
+        <h1 id="trip-title">{t('Pelos caminhos do sertão')}</h1>
+        <p>{t('A travel story connecting photographs, sounds, and geographic data from Aracaju to Juazeiro do Norte. Photo locations are approximate.')}</p>
+        <p><a href={person.url}>{t('Built by Eduardo Belluti')}</a></p>
+        <nav aria-label={t('Project information')}>
+          <a href={site.writeupUrl}>{t('About this project')}</a>{' · '}
+          <a href="https://eduardobelluti.com/projects/personal">{t('More projects')}</a>
+        </nav>
+      </section>
       <section className="biome-legend" aria-label={t("Northeast biomes")}>
         <div className="biome-heading"><div><h2>{t("Biomes")} <small>2004</small></h2></div>
           <button aria-pressed={showBiomes} onClick={() => setShowBiomes(!showBiomes)}>{t(showBiomes ? 'Hide biomes' : 'Show biomes')}</button>

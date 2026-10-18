@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import messages from './translations.json';
+import { pageDetails } from './site';
 import { usePathname } from 'next/navigation';
 
 type Language = 'en' | 'pt';
@@ -21,9 +22,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, []);
   const t = useCallback((text: string) => dictionary[text]?.[language] ?? text, [language]);
   useEffect(() => {
-    document.title = pathname.startsWith('/trips/') ? `${t('Pelos caminhos do sertão')} — ${t('Stories')}` : t('Foto — Photos on a map');
-    document.querySelector('meta[name="description"]')?.setAttribute('content', t('Place your photos on an interactive map.'));
-  }, [pathname, t]);
+    const details = pageDetails(pathname, language);
+    document.title = details.title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', details.description);
+  }, [pathname, language]);
   return <Context.Provider value={{ language, setLanguage, t }}>{children}</Context.Provider>;
 }
 
